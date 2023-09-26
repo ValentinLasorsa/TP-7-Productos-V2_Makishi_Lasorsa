@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka&family=Roboto+Slab&display=swap');
+
+.Carousel p, .Carousel h3 {
+    color: black;
+    align-items: center;
+}
+.RowCarousel {
+    width: 100%;
+}
+.Carousel {
+    width: 50%;
+    align-items: center;
+}
+.producto {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.titulo {
+    font-size: 50px;
+    text-align: center;
+    font-family: 'Roboto Slab', serif;
+}
+.producto {
+    margin-bottom: 10px;
+    margin-left: 20px;
+
+}
+.botonProducto {
+    padding: 10px;
+    width: 200px;
+    background-color: #314ce9;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+}

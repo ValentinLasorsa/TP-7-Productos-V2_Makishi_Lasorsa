@@ -1,0 +1,32 @@
+.box {
+    display: flex;
+    box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+}
+
+.imagenes {
+    display: flex;
+}
+.imagen {
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.precios {
+    display: flex;
+}
+.precioConDescuento {
+    font-weight: lighter;
+    color: rgb(171, 171, 171);
+    text-decoration-line: line-through;
+}
+.verticalLine {
+    border-left: 1px solid #9b9b9b;
+    margin-left: 5px;
+    margin-right: 5px;
+    height: 370px;
+    vertical-align: center;
+}
+.containerTexto {
+    margin-top: 20px;
+}
