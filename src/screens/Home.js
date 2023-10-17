@@ -1,78 +1,72 @@
-import axios from 'axios'
-import { useState, useEffect } from 'react'
-import Row from 'react-bootstrap/Row';
-import '../Styles/Home.css'
-import Carousel from 'react-bootstrap/Carousel';
-import foto1 from '../Img/bg-showcase-1.jpg'
-import foto2 from '../Img/bg-showcase-2.jpg'
-import foto3 from '../Img/Gato.jpg'
-import Col from 'react-bootstrap/Col';
-import Producto from '../Components/Producto';
-export default function Home() {
-    const [destacados, setDestacados] = useState([])
-    const [isLoading, setLoading] = useState(true)
-    const randomNumberInRange = (min, max) => {
-        return Math.floor(Math.random()
-            * (max - min + 1)) + min;
+import axios from "axios";
+import {useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import ProductoHome from "../Components/Productos/ProductoHome";
+
+
+const Home = () => {
+  const [productos, setProductos] = useState([]);
+  const FILTRO = "smartphones"
+
+
+  useEffect(() => {
+    const getProductos = async () => {
+        try {
+            const response = await axios.get("https://dummyjson.com/products/category/" + FILTRO);
+            const listaProductos = response.data.products;
+            //listaProductos
+            setProductos(listaProductos); 
+        } catch (error) {
+        console.log('Error:', error);
+        }
     };
-    useEffect(() => {
-        axios.get("https://dummyjson.com/products")
-            .then((response) => {
-                const prods = response.data.products;
-                let destacadosArray = [];
-                for (let index = 0; index < 6; index++) {
-                    let num
-                    num = randomNumberInRange(0, prods.length - 1);
-                    destacadosArray.push(prods[num]);
-                }
-                setDestacados(destacadosArray);
-            })
-            .finally(() => {
-                setLoading(false)
-            })
-    }, [])
+    getProductos();      
+  }, []);
 
-    const calcularDescuento = (producto) => {
-        let precio = producto.price
-        let discount = producto.discountPercentage
-        const precioConDescuento = (Math.round(precio - (precio * discount / 100)))
-        return precioConDescuento
-    }
-
+  if(productos.length === 0){
+    return(
+      <div>Loading...</div>
+    )
+  }else{
     return (
-        <div>
-            {isLoading ? null : (
-                <>
-                    <h1 className='titulo'>Bienvenidos a TechGlus</h1>
-
-                    <div className='RowCarousel d-flex justify-content-center'>
-                        <Carousel className='Carousel'>
-                            <Carousel.Item className='boxFoto'>
-                                <img className='fotoCarousel' src={foto1} alt='hola' />
-                            </Carousel.Item>
-                            <Carousel.Item>
-                                <img src={foto2} alt='hola' />
-                            </Carousel.Item>
-                            <Carousel.Item>
-                                <img src={foto3} width='900' height='600' alt='hola' />
-                            </Carousel.Item>
-                        </Carousel>
-                    </div>
-
-                    <div className='container'>
-                        <Row md={3}>
-                            {destacados.map((element) => {
-                                return (
-                                    <Col key={element.id}>
-                                        <Producto titulo={element.title} id={element.id} imagen={element.thumbnail} precio={element.price} producto={element} calcularDescuento={calcularDescuento}></Producto>
-                                    </Col>
-                                )
-                            })}
-                        </Row>
-                    </div>
-
-                </>
-            )}
-        </div>
-    );
+        <>
+          <div className="banner-layer">
+            <div className="container">
+              <div className="image-banner">
+                  <Link to="/shop-v1-root-category" className="mx-auto banner-hover effect-dark-opacity">
+                      <img className="img-fluid" src="images/banners/bannerlayer-1.jpg" alt="Winter Season Banner"/>
+                  </Link>
+              </div>
+            </div>
+          </div>
+          <div className="container">
+              <div className="sec-maker-header text-center">
+                  <h3 className="sec-maker-h3">Smartphones</h3>
+                  <ul className="nav tab-nav-style-1-a justify-content-center">
+                      <li className="nav-item">
+                          <Link className="nav-link" data-toggle="tab" to="#men-best-selling-products">Best Selling</Link>
+                      </li>
+                  </ul>
+              </div>
+              <div className="row">
+              {productos.slice(0,4).map((producto, index) =>
+                  <div className="col-3" key={index}>
+                      <Link
+                          key={producto.id}
+                          //className="product"
+                          to={"/productos/" + producto.id}
+                          data-category="smartphones"
+                        >
+                        <ProductoHome producto = {producto} url={'/productos/'+ producto.id}/>              
+                      </Link>    
+                </div>               
+              )}
+              </div>
+            </div>
+      
+        </>
+      );
+  };
 }
+
+export default Home
