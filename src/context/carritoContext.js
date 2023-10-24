@@ -11,8 +11,14 @@ const CarritoProvider = (props) => {
 
     function agregarProducto(producto) {
 
+        console.log("idProducto: " + producto.id)
+        
         const index = productos.findIndex((p) => p.id === producto.id);
+        //console.log(index)
+
+
         if (index < 0) {
+            //creas uno nuevo
             producto.cant = 1;
             producto.total = (producto.cant * (producto.price - (producto.price * producto.discountPercentage) / 100));
             setProductos([
@@ -20,7 +26,12 @@ const CarritoProvider = (props) => {
                 producto,
             ])
         } else {
+            //actualizas en la posicion index
             let newproductos = [...productos];
+            //console.log("New" + newproductos)
+
+            //newproductos[productos.length].cant = producto.cant;
+            //newproductos[productos.length].total; 
             console.log(index)
             newproductos[index].cant = newproductos[index].cant + 1;
             newproductos[index].total = (newproductos[index].cant * (newproductos[index].price - (newproductos[index].price * newproductos[index].discountPercentage) / 100));
@@ -32,7 +43,11 @@ const CarritoProvider = (props) => {
 
     function eliminarProducto(producto) {
 
+        console.log("idProducto: " + producto.id)
+        //console.log("Productos: " + JSON.stringify(productos, null, 2))
+        //  console.log("idProducto: "+ newproductos.id)
         const index = productos.findIndex((p) => p.id === producto.id);
+        console.log("index: " + index)
         if (index < 0) {
             console.log("El producto no se encontró en el carrito.")
         }
@@ -54,9 +69,12 @@ const CarritoProvider = (props) => {
             let totalCantProductos = 0;
 
             productos.forEach(function (prod) {
+                // Actualizar las variables temporales con los cálculos
                 totalPrecioTot += prod.total;
                 totalCantProductos += prod.cant;
             });
+
+            // Actualizar los estados con los valores calculados
             setPrecioTot(totalPrecioTot);
             setCantProductos(totalCantProductos);
         }

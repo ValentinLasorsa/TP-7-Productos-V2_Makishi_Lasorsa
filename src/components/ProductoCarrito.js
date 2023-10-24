@@ -1,27 +1,47 @@
-import { propTypes } from 'react-bootstrap/esm/Image'
-import '../Styles/Carrito.css'
-import PropTypes from 'prop-types'
-export default function ProductoCarrito(ObjetoCarrito) {
-    return (
-        <div className="containerCarrito">
-            <div className='row'>
-                <div className='col-md-2'>
-                    <div className='containerImagen'>
-                        <img src={ObjetoCarrito.ObjetoCarrito.thumbnail} className="imagenProducto" alt='no hay imagen'></img>
-                    </div>
-                </div>
-                <div className='col-md-7 textoCarrito'>
-                    <h2>{ObjetoCarrito.ObjetoCarrito.title}</h2>
-                </div>
-                <div className='col-md-3 textoCarrito'>
-                    <h2>{ObjetoCarrito.ObjetoCarrito.price}$</h2>
-                </div>
-            </div>
-            
-        </div>
-    )
-}
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { CarritoContext } from "../../Context/CarritoContext";
 
-ProductoCarrito.propTypes = {
-    ObjetoCarrito: PropTypes.object
-}
+
+function ProductoCarrito({producto,url}){
+  const {eliminarProducto} = useContext(CarritoContext)
+  console.log("producto: " + producto)
+  console.log("Idproducto: " + producto.id + " Cant Prod: " + producto.cant)
+
+  const eliminar = (e) => {
+      eliminarProducto(producto);
+      e.preventDefault();
+  }
+
+  return (
+    <tr>
+      <td>
+        <div className="cart-anchor-image">
+            <Link to={url}>
+              <img src={producto.images[0]} alt="Product"/>
+              <h6>{producto.title}</h6>
+            </Link>
+        </div>
+      </td>
+      <td>
+        <div className="cart-price">
+              ${(producto.price- (producto.price*producto.discountPercentage)/100).toFixed(2)} 
+        </div>
+      </td>
+      <td>
+        <div className="cart-quantity">
+          <div className="quantity">
+            <p>{producto.cant}</p>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div className="action-wrapper">
+            <button className="button button-outline-secondary fas fa-trash" onClick={(e) => eliminar(e)}></button>
+        </div>
+      </td>
+    </tr>
+    );
+};
+
+export default ProductoCarrito
