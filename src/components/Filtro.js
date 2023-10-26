@@ -1,11 +1,10 @@
 
 
 import { useContext } from "react";
-import { CategoriesContext } from "../Context/CategoriesContext";
+import { CategoriaContext } from "../context/categoriaContext";
 
-const Filter = ({handleFilter, handleInput}) => {
-    const {categorias} = useContext(CategoriesContext)
-    //console.log(categorias);
+const Filtro = ({handleFilter, handleInput}) => {
+    const {categorias} = useContext(CategoriaContext)
     return (
         <>
             <div className="container flex page-bar clearfix">
@@ -50,4 +49,4 @@ const Filter = ({handleFilter, handleInput}) => {
     );
 };
 
-export default Filter
+export default Filtro

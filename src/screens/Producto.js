@@ -2,12 +2,12 @@
 import { useContext, useEffect, useState} from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import Filter from "../Components/Filter";
-import { ProductoContext } from "../Context/ProductoContext";
-import Producto from "../Components/Productos/Producto";
+import Filtro from "../components/Filtro";
+import { ProductoContext } from "../context/productoContext";
+import Producto from "../components/Producto";
 
 
-const Producto = () => {
+const Productos = () => {
   const {productos} = useContext(ProductoContext)
   const [listadoProductos, setListadoproductos] = useState([]);
  
@@ -37,8 +37,6 @@ const Producto = () => {
     setListadoproductos(productos);
   },[productos])
 
-  // Here we use item offsets; we could also use page offsets
-  // following the API or data you're working with.
 if(productos.length === 0){
   return(
     <div>Loading...</div>
@@ -69,7 +67,7 @@ else{
               <h3>Men's Clothing</h3>
             </div>
               <div className="">
-              <Filter handleFilter={handleFilter} handleInput={handleInput}/>
+              <Filtro handleFilter={handleFilter} handleInput={handleInput}/>
               {listadoProductos.map((producto) =>
                 <Link
                 key={producto.id}
@@ -77,7 +75,7 @@ else{
                 to={"/productos/" + producto.id}
                 data-category="smartphones"
               >
-              <Producto producto = {producto} url={'/productos/'+ producto.id}/>              
+              <Productos producto = {producto} url={'/productos/'+ producto.id}/>              
              </Link>                   
               )}
             </div>
@@ -88,4 +86,4 @@ else{
   }
 };
 
-export default Producto
+export default Productos

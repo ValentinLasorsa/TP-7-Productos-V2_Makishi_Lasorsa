@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { CarritoContext } from "../../Context/CarritoContext";
+import { CarritoContext } from "../context/carritoContext";
 import { useContext } from "react";
 
 const Producto = ({producto, url}) => {

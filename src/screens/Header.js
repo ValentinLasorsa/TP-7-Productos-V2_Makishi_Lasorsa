@@ -1,5 +1,5 @@
 import { Link, Outlet } from "react-router-dom";
-import CarritoHeader from "../Components/Header/CarritoHeader";
+import CarritoHeader from "../components/CarritoHeader";
 
 function Header() {
     return (

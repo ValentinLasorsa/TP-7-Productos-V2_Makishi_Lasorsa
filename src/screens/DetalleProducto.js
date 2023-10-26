@@ -5,7 +5,7 @@ import axios from "axios";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import { useContext } from "react";
-import { CarritoContext } from "../Context/CarritoContext";
+import { CarritoContext } from "../context/carritoContext";
 
 
 export default function DetalleProducto() {

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import ProductoCart from "../Components/Productos/ProductoCart";
+import ProductoCarrito from "../components/ProductoCarrito";
 import { CarritoContext } from "../context/carritoContext";
 import { useContext } from "react";
 
@@ -13,14 +13,14 @@ const Carrito = () => {
             <div className="page-style-a">
                 <div className="container">
                     <div className="page-intro">
-                        <h2>Cart</h2>
+                        <h2>Carrito</h2>
                         <ul className="bread-crumb">
                             <li className="has-separator">
                                 <i className="ion ion-md-home"></i>
                                 <Link to="/">Home</Link>
                             </li>
                             <li className="is-marked">
-                                <Link to="/cart">Cart</Link>
+                                <Link to="/carrito">Carrito</Link>
                             </li>
                         </ul>
                     </div>
@@ -45,7 +45,7 @@ const Carrito = () => {
                                     
                                     {listProdCart.length >0  ?(
                                         listProdCart.map((producto, index) =>
-                                        <ProductoCart producto = {producto} url={'/productos/'+ producto.id} key={index}/>        
+                                        <ProductoCarrito producto = {producto} url={'/productos/'+ producto.id} key={index}/>        
                                     )
                                     ):(
                                         <>  </>
