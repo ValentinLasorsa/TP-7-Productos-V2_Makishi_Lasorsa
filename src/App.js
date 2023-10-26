@@ -1,4 +1,3 @@
-//import logo from './logo.svg';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./screens/Home";
 import Contacto from './screens/Contacto'
@@ -10,7 +9,6 @@ import Carrito from "./screens/Carrito";
 import Error from "./screens/Error";
 import CarritoProvider from "./context/carritoContext";
 import ProductoProvider from "./context/productoContext";
-//import Producto from "./Components/Producto";
 import CategoriaProvider from "./context/categoriaContext";
 import DetalleProducto from "./screens/DetalleProducto";
 
